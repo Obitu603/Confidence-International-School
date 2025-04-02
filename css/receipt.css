@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+  }
+
+  .receipt-container {
+    background: #ffffff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+  }
+
+  .receipt-container h1 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #28a745;
+  }
+
+  .receipt-container p {
+    margin: 8px 0;
+    font-size: 16px;
+  }
+
+  .receipt-container .highlight {
+    font-weight: bold;
+    color: #333;
+  }
+
+  .receipt-container .reference {
+    background-color: #f4f4f4;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 4px;
+    word-break: break-word;
+  }
+
+  .receipt-container a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+
+  .receipt-container a:hover {
+    background-color: #218838;
+  }

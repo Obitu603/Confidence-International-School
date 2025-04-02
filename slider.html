@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Registration Page</h1>
+        <button id="register-btn" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">Register</button>
+        <!-- Modal -->
+        <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="registerModalLabel">Registration Form</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="registerForm">
+                            <div class="form-group">
+                                <label for="username">Username:</label>
+                                <input type="text" class="form-control" id="username" placeholder="Enter Username">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter Email">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password:</label>
+                                <input type="password" class="form-control" id="password" placeholder="Enter Password">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Name:</label>
+                                <input type="text" class="form-control" id="name" placeholder="Enter Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone:</label>
+                                <input type="tel" class="form-control" id="phone" placeholder="Enter Phone Number">
+                            </div>
+                            <button type="button" class="btn btn-primary" id="next-btn">Next</button>
+                            <button type="button" class="btn btn-primary" id="prev-btn" style="display: none;">Previous</button>
+                            <button type="button" class="btn btn-primary" id="submit-btn" style="display: none;">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var registerForm = document.getElementById('registerForm');
+        var nextBtn = document.getElementById('next-btn');
+        var prevBtn = document.getElementById('prev-btn');
+        var submitBtn = document.getElementById('submit-btn');
+
+        nextBtn.addEventListener('click', function() {
+            registerForm.style.display = 'none';
+            nextBtn.style.display = 'none';
+            prevBtn.style.display = 'block';
+            submitBtn.style.display = 'block';
+        });
+
+        prevBtn.addEventListener('click', function() {
+            registerForm.style.display = 'block';
+            nextBtn.style.display = 'block';
+            prevBtn.style.display = 'none';
+            submitBtn.style.display = 'none';
+        });
+
+        submitBtn.addEventListener('click', function() {
+            // Submit form logic here
+        });
+    </script>
+</body>
+</html>

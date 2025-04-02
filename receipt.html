@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Receipt</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+ <link rel="stylesheet" href="css/receipt.css">
+</head>
+<body>
+  <div class="receipt-container">
+    <h1>Payment Successful!</h1>
+
+    <p><span class="highlight">Name:</span> <span id="name"></span></p>
+    <p><span class="highlight">Email:</span> <span id="email"></span></p>
+    <p><span class="highlight">Session:</span> <span id="session"></span></p>
+    <p><span class="highlight">Class:</span> <span id="class"></span></p>
+    <p><span class="highlight">Term:</span> <span id="term"></span></p>
+    <p><span class="highlight">Amount Paid:</span> ₦<span id="amount"></span></p>
+
+    <div class="reference">
+      <p><span class="highlight">Transaction Reference:</span></p>
+      <p id="reference"></p>
+    </div>
+
+    <a href="studentdashboard.php">Go Back to Payment Page</a>
+  </div>
+
+  <script>
+    // Function to get query parameters from the URL
+    function getQueryParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        reference: params.get('reference'),
+        name: params.get('name'),
+        email: params.get('email'),
+        session: params.get('session'),
+        class: params.get('class'),
+        term: params.get('term'),
+        amount: params.get('amount'),
+      };
+    }
+
+    // Populate receipt details
+    const params = getQueryParams();
+    document.getElementById('name').textContent = params.name || 'N/A';
+    document.getElementById('email').textContent = params.email || 'N/A';
+    document.getElementById('session').textContent = params.session || 'N/A';
+    document.getElementById('class').textContent = params.class || 'N/A';
+    document.getElementById('term').textContent = params.term || 'N/A';
+    document.getElementById('amount').textContent = params.amount || 'N/A';
+    document.getElementById('reference').textContent = params.reference || 'N/A';
+  </script>
+</body>
+</html>

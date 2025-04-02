@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adino Jewelry</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* From Uiverse.io by ammarsaa */
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 350px;
+      padding: 20px;
+      border-radius: 20px;
+      position: relative;
+      background-color: #1a1a1a;
+      color: #fff;
+      border: 1px solid #333;
+    }
+
+    .title {
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: -1px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding-left: 30px;
+      color: #00bfff;
+    }
+
+    .title::before,
+    .title::after {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      border-radius: 50%;
+      left: 0px;
+      background-color: #00bfff;
+    }
+
+    .title::after {
+      animation: pulse 1s linear infinite;
+    }
+
+    .message,
+    .signin {
+      font-size: 14.5px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .signin {
+      text-align: center;
+    }
+
+    .signin a:hover {
+      text-decoration: underline royalblue;
+    }
+
+    .signin a {
+      color: #00bfff;
+    }
+   
+
+    .flex {
+      display: flex;
+      width: 100%;
+      gap: 6px;
+    }
+
+    .form label {
+      position: relative;
+      display: flex;
+      width: 100%;
+    }
+
+    .form label i {
+        position: absolute;
+        left: 10px; /* Adjust as needed */
+        top: 20%;
+        transform: translateY(-50%);
+        color: rgba(255, 255, 255, 0.5);
+      } 
+
+    .form label .input {
+      background-color: #333;
+      margin-right: 2m0px;
+      color: #fff;
+      width: 100%;
+      padding: 20px 10px; /* Adjusted padding */
+      outline: none;
+      border: 1px solid rgba(105, 105, 105, 0.397);
+      border-radius: 10px;
+    }
+
+    .form label .input + span {
+      color: rgba(255, 255, 255, 0.5);
+      position: absolute;
+      left: 40px; /* Adjusted for icon */
+      top: 0px;
+      font-size: 0.9em;
+      cursor: text;
+      transition: 0.3s ease;
+    }
+
+    .form label .input:placeholder-shown + span {
+      top: 12.5px;
+      font-size: 0.9em;
+    }
+
+    .form label .input:focus + span,
+    .form label .input:valid + span {
+        color: #00bfff;
+        top: -10px;
+        font-size: 0.7em;
+        font-weight: 600;
+    }
+
+    .input {
+        font-size: medium;
+    }
+
+    .submit {
+        border:none;
+        outline:none;
+        padding:10px;
+        border-radius:10px;
+        color:#fff;
+        font-size:16px;
+        transform:.3s ease;
+        background-color:#00bfff;
+    }
+
+    .submit:hover {
+        background-color:#00bfff96;
+    }
+
+    @keyframes pulse {
+        from { transform: scale(0.9); opacity:1; }
+        to { transform: scale(1.8); opacity:.0; }
+    }
+</style>
+</head>
+<body>
+<form class="form">
+    <p class="title">Register</p>
+    <p class="message">Signup now and get full access to our app.</p>
+   
+    <div class="flex">
+     
+            <label>
+                <i class="fas fa-user"></i>
+                <input class="input" type="text" placeholder="" required="">
+                <span>Firstname</span>
+            </label>
+        
+        <label>
+            <i class="fas fa-user"></i>
+            <input class="input" type="text" placeholder="" required="">
+            <span>Lastname</span>
+        </label>
+    </div> 
+   
+    <label>
+        <i class="fas fa-envelope"></i>
+        <input class="input" type="email" placeholder="" required="">
+        <span>Email</span>
+    </label>
+
+    <label>
+        <i class="fas fa-lock"></i>
+        <input class="input" type="password" placeholder="" required="">
+        <span>Password</span>
+    </label>
+
+    <label>
+        <i class="fas fa-lock"></i>
+        <input class="input" type="password" placeholder="" required="">
+        <span>Confirm password</span>
+    </label>
+
+    <button class="submit">Submit</button>
+   
+    <p class="signin">Already have an account? <a href="#">Signin</a></p>
+</form>
+</body>
+</html>

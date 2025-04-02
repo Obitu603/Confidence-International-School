@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+
+</style>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <a href="" class="logo"> <span>Confidence International </span>School</a>
+            <div>
+                <img src="image/p8.jpeg" alt="Profile Picture" class="profile">
+            </div>
+            
+            <div class="buttons">
+                <button onclick="showBio()">Bio Data</button>
+                <button onclick="showEvents()">Events</button>
+                <button onclick="showRecords()">Records</button>
+                <button onclick="pay()">Pay</button>
+                <button onclick="logout()">Logout</button>
+            </div>
+        </div>
+        <div class="content">
+            </div>
+    </div>
+    <script>
+        function showBio() {
+            document.querySelector('.content').innerHTML = "Your Bio Data";
+        }
+        function showEvents() {
+            document.querySelector('.content').innerHTML = "Your Events";
+        }
+        function showRecords() {
+            document.querySelector('.content').innerHTML = "Your Records";
+        }
+        function pay() {
+            document.querySelector('.content').innerHTML = "Pay School fee";
+        }
+        function logout() {
+            document.querySelector('.content').innerHTML = "You are logged out";
+        }
+    </script>
+</body>
+</html>

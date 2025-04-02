@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Form with Paystack</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <!-- <link rel="stylesheet" href="CIS.css"> -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root{
+    --yellow:#f9d806;
+    --light-yellow:#ffee80;
+    --black:#130f40;
+    --light-color:#666;
+    --border:.1rem solid rgba(0,0,0,.1);
+    --box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
+}
+*{
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: all .2s linear;
+}
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f9f9f9;
+      }
+  
+   
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        /* max-width: 350px; */
+  
+        padding: 20px;
+        border-radius: 20px;
+        position: relative;
+        background-color: rgba(37, 59, 222, 0.301);
+        color: #1a1a1a;
+        /* border: 1px solid #333; */
+      }
+  
+      .title {
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: -1px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding-left: 30px;
+        color: var(--black);
+      }
+  
+      .title::before,
+      .title::after {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        border-radius: 50%;
+        left: 0px;
+        background-color: var(--black);
+      }
+  
+      .title::after {
+        animation: pulse 1s linear infinite;
+      }
+  
+      .message,
+      .signin {
+        font-size: 14.5px;
+        color:#1a1a1a;
+      }
+  
+      .signin {
+        text-align: center;
+      }
+  
+      .signin a:hover {
+        text-decoration: underline #333;
+      }
+  
+      .signin a {
+        color: var(--yellow);
+      }
+     
+  
+      .flex {
+        display: flex;
+        width: 100%;
+        gap: 6px;
+      }
+  
+      .form label {
+        position: relative;
+        display: flex;
+        width: 100%;
+      }
+  
+      .form label i {
+          position: absolute;
+          left: 10px; /* Adjust as needed */
+          top: 20%;
+          transform: translateY(-50%);
+          color: rgba(255, 255, 255, 0.5);
+        } 
+  
+      .form label .input {
+        background-color: #333;
+        margin-right: 2m0px;
+        color: #fff;
+        width: 100%;
+        padding: 20px 10px; /* Adjusted padding */
+        outline: none;
+        border: 1px solid rgba(105, 105, 105, 0.397);
+        border-radius: 10px;
+      }
+  
+      .form label .input + span {
+        color: rgba(255, 255, 255, 0.5);
+        position: absolute;
+        left: 40px; /* Adjusted for icon */
+        top: 0px;
+        font-size: 1.2em;
+        cursor: text;
+        transition: 0.3s ease;
+      }
+  
+      .form label .input:placeholder-shown + span {
+        top: 12.5px;
+        font-size: 0.9em;
+      }
+  
+      .form label .input:focus + span,
+      .form label .input:valid + span {
+          color:  rgba(255, 255, 255, 0.5);
+          top: -10px;
+          font-size: 1em;
+          font-weight: 600;
+      }
+  
+      .input {
+          font-size: medium;
+      }
+  
+      .submit {
+          border:none;
+          outline:none;
+          padding:10px;
+          border-radius:10px;
+          color:#fff;
+          font-size:16px;
+          transform:.3s ease;
+          background-color:var(--black);
+      }
+  
+      .submit:hover {
+          background-color: #28a745;
+          color: #fff;
+      }
+  
+      @keyframes pulse {
+          from { transform: scale(0.9); opacity:1; }
+          to { transform: scale(1.8); opacity:.0; }
+      }
+  
+    
+  </style>
+</head>
+<body>
+  <form class="form" id="paymentForm">
+    <p class="title">Make Payment</p>
+
+    <div class="flex">
+      <label>
+        <i class="fas fa-user"></i>
+        <input class="input" type="text"  id="Fname" required />
+        <span>Firstname</span>
+      </label>
+      <label>
+        <i class="fas fa-user"></i>
+        <input class="input" type="text"  id="Lname" required />
+        <span>Lastname</span>
+      </label>
+    </div>
+
+    <label>
+      <i class="fas fa-envelope"></i>
+      <input class="input" type="email"  id="email-address" required />
+      <span>Email</span>
+    </label>
+
+    <label>
+      <i class="fas fa-user"></i>
+      <input class="input" type="text"  id="Session" required />
+      <span>Session</span>
+    </label>
+
+    <div class="flex">
+      <label>
+        <i class="fas fa-user"></i>
+        <select id="Term" class="input" required>
+          <option value="">Select Term</option>
+          <option value="1st">1ST Term</option>
+          <option value="2nd">2ND Term</option>
+          <option value="3rd">3RD Term</option>
+        </select>
+      </label>
+      <label>
+        <i class="fas fa-user"></i>
+        <select class="input" id="studentClass" required>
+          <option value="">Select Class</option>
+          <option value="Nur 1" data-amount="3000">Nursery 1 - ₦3000</option>
+          <option value="Nur 2" data-amount="3500">Nursery 2 - ₦3500</option>
+          <option value="Pri1" data-amount="4000">Primary 1 - ₦4000</option>
+          <option value="Pri2" data-amount="4500">Primary 2 - ₦4500</option>
+          <option value="Pri3" data-amount="5000">Primary 3 - ₦5000</option>
+          <option value="Pri4" data-amount="5500">Primary 4 - ₦5500</option>
+          <option value="Pri5" data-amount="6000">Primary 5 - ₦6000</option>
+          <option value="JSS1" data-amount="7000">JSS 1 - ₦7000</option>
+          <option value="JSS2" data-amount="7500">JSS 2 - ₦7500</option>
+          <option value="JSS3" data-amount="8000">JSS 3 - ₦8000</option>
+          <option value="SSS1" data-amount="9000">SSS 1 - ₦9000</option>
+          <option value="SSS2" data-amount="9500">SSS 2 - ₦9500</option>
+          <option value="SSS3" data-amount="10000">SSS 3 - ₦10,000</option>
+        </select>
+      </label>
+    </div>
+
+    <button type="button" class="submit" onclick="payWithPaystack()">Pay</button>
+  </form>
+
+  <!-- Paystack JavaScript library -->
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+  <script>
+    function payWithPaystack() {
+      const firstName = document.getElementById('Fname').value;
+      const lastName = document.getElementById('Lname').value;
+      const email = document.getElementById('email-address').value;
+      const session = document.getElementById('Session').value;
+      const term = document.getElementById('Term').value;
+      const classSelect = document.getElementById('studentClass');
+      const studentClass = classSelect.options[classSelect.selectedIndex].value;
+      const amount = classSelect.options[classSelect.selectedIndex].getAttribute('data-amount');
+
+      if (!email || !firstName || !lastName || !session || !term || !studentClass || !amount) {
+        alert("Please fill in all required fields.");
+        return;
+      }
+
+      let handler = PaystackPop.setup({
+        key: 'pk_test_ab1fdfb1aa9798bf126fa9a1629f26a2b38ff7f5', // Replace with your Paystack public key
+        email: email,
+        amount: amount * 100, // Amount in kobo
+        currency: 'NGN',
+        ref: 'PS-' + Math.floor((Math.random() * 1000000000) + 1), // Generate a unique reference
+        metadata: {
+          custom_fields: [
+            {
+              display_name: "Student Name",
+              variable_name: "student_name",
+              value: firstName + " " + lastName
+            },
+            {
+              display_name: "Session",
+              variable_name: "session",
+              value: session
+            },
+            {
+              display_name: "Class",
+              variable_name: "class",
+              value: studentClass
+            },
+            {
+              display_name: "Term",
+              variable_name: "term",
+              value: term
+            }
+          ]
+        },
+        callback: function(response) {
+          // Redirect to receipt.html with transaction details
+          const redirectURL = `receipt.html?reference=${response.reference}&name=${encodeURIComponent(firstName + " " + lastName)}&email=${encodeURIComponent(email)}&session=${encodeURIComponent(session)}&class=${encodeURIComponent(studentClass)}&term=${encodeURIComponent(term)}&amount=${encodeURIComponent(amount)}`;
+          window.location.href = redirectURL;
+        },
+        onClose: function() {
+          alert('Transaction was not completed.');
+        }
+      });
+
+      handler.openIframe();
+    }
+  </script>
+</body>
+</html>

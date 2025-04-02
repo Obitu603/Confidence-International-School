@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="payment.css">
+    <title>Student Fee Payment Record</title>
+    <style>
+        table {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <a href="" class="navbar-brand logo"> <span>CI</span>S</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            bg-gradient-primary aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <button class="btn btn-warning" data-toggle="modal" data-target="#loginModal">Login</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <!-- <h2>Confidence International School - Fee Payment Records</h2> -->
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Term</th>
+                    <th>Class</th>
+                    <th>Session</th>
+                    <th>Amount</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John Doe</td>
+                    <td>1st Term</td>
+                    <td>Primary 4</td>
+                    <td>2024/2025</td>
+                    <td>$500</td>
+                    <td>Johdoe@gmail.com</td>
+                    <td>Paid</td>
+                    <td>
+                        <button class="btn btn-info"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-warning"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+                <!-- Add more rows as needed -->
+            </tbody>
+        </table>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

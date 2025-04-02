@@ -1,0 +1,237 @@
+if (isset($_POST['login'])) {
+    // Start the session if not already started
+    // if (session_status() !== PHP_SESSION_ACTIVE) {
+    //     session_start();
+    // }
+
+    // Retrieve and sanitize input
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $password = $_POST['password']; // Password does not need escaping as it won't be used directly in SQL
+
+    // Query to fetch user details by email
+    $sql = "SELECT * FROM user_info WHERE email = '$email'";
+    $result = $conn->query($sql);
+
+    if ($result && $result->num_rows === 1) {
+        // Fetch the user data
+        $user = $result->fetch_assoc();
+
+        // Verify the password
+        if (password_verify($password, $user['password'])) {
+            // Store user information in session
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['user_name'] = $user['first_name'] . ' ' . $user['last_name'];
+            $_SESSION['user_type'] = $user['user_type'];
+
+            // Redirect based on user_type
+            switch ($user['user_type']) {
+                case 'admin':
+                    header("Location: admindashboard.php");
+                    exit;
+                case 'student':
+                    header("Location: student.php");
+                    exit;
+                default:
+                    $_SESSION['message'] = "Unknown user type!";
+                    header("Location: login.php");
+                    exit;
+            }
+        } else {
+            // Password mismatch
+            $_SESSION['message'] = "Invalid password!";
+            header("Location: login.php");
+            exit;
+        }
+    } else {
+        // Email not found
+        $_SESSION['message'] = "Email not found!";
+        header("Location: login.php");
+        exit;
+    }
+} else {
+    // Unauthorized access
+    $_SESSION['message'] = "Unauthorized access!";
+    header("Location: login.php");
+    exit;
+}
+
+
+
+if (isset($_POST['login'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+   // $password = md5($_POST['password']);
+    $query = $conn->query("SELECT user_type FROM user_info WHERE email='$email' AND password='$password'");
+    
+    if ($query->num_rows > 0) {
+        $user_type = $query->fetch_assoc()['user_type'];
+        $_SESSION['user_type'] = $user_type;
+       
+        // Redirect based on role
+        if ($user_type == 'admin') {
+            header('Location: admindashboard.php');
+        } else if ($user_type == 'student') {
+            header('Location: studentdashboard.php');
+        }
+    } else {
+        $_SESSION['message'] = "Invalid password!";
+        echo "Invalid credentials.";
+    }
+}
+
+
+
+
+
+if (isset($_POST['regbtn'])) {
+    // Start session if not already started
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
+
+    // Sanitize user inputs
+    $sname = mysqli_real_escape_string($conn, $_POST["sname"]);
+    $fname = mysqli_real_escape_string($conn, $_POST["fname"]);
+    $lname = mysqli_real_escape_string($conn, $_POST["lname"]);
+    $email = mysqli_real_escape_string($conn, $_POST["email"]);
+    $address = mysqli_real_escape_string($conn, $_POST["address"]);
+    $DOB = mysqli_real_escape_string($conn, $_POST["DOB"]);
+    $gender = mysqli_real_escape_string($conn, $_POST["gender"]);
+    $phone = mysqli_real_escape_string($conn, $_POST["phone"]);
+    $SOO = mysqli_real_escape_string($conn, $_POST["SOO"]);
+    $password = mysqli_real_escape_string($conn, $_POST["password"]);
+    $cpassword = mysqli_real_escape_string($conn, $_POST["cpassword"]);
+    $user_type = mysqli_real_escape_string($conn, $_POST["user_type"]);
+
+    // Check if passwords match
+    if ($password === $cpassword) {
+        // Hash the password before saving it to the database
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        // Insert data into the user_info table (without storing plain-text passwords)
+        $sql = "INSERT INTO user_info (sur_name, first_name, last_name, email, address, dob, gender, phone_no, soo, user_type, password) 
+                VALUES ('$sname', '$fname', '$lname', '$email', '$address', '$DOB', '$gender', '$phone', '$SOO', '$user_type', '$hashedPassword')";
+
+        if ($conn->query($sql) === TRUE) {
+            // Registration successful
+            $_SESSION['message'] = "Successfully Registered";
+            header('Location: Home.php');
+            exit;
+        } else {
+            // Registration failed
+            $_SESSION['message'] = "Registration Failed: " . $conn->error;
+            header('Location: Home.php');
+            exit;
+        }
+    } else {
+        // Passwords do not match
+        $_SESSION['message'] = "Passwords do not match";
+        header('Location: Home.php'); // Redirect back to the registration page
+        exit;
+    }
+}
+
+
+// if (isset($_POST['regbtn'])) {
+//     $sname = mysqli_real_escape_string($conn, $_POST["sname"]);
+//     $fname = mysqli_real_escape_string($conn, $_POST["fname"]);
+//     $lname = mysqli_real_escape_string($conn, $_POST["lname"]);
+//     $email = mysqli_real_escape_string($conn, $_POST["email"]);
+//     $address = mysqli_real_escape_string($conn, $_POST["address"]);
+//     $DOB = mysqli_real_escape_string($conn, $_POST["DOB"]);
+//     $gender = mysqli_real_escape_string($conn, $_POST["gender"]);
+//     $phone = mysqli_real_escape_string($conn, $_POST["phone"]);
+//     $SOO = mysqli_real_escape_string($conn, $_POST["SOO"]);
+//     $password = mysqli_real_escape_string($conn, $_POST["password"]);
+//     $cpassword = mysqli_real_escape_string($conn, $_POST["cpassword"]);
+//     $user_type = mysqli_real_escape_string($conn, $_POST["user_type"]);
+
+    // Check if passwords match
+    // if ($password === $cpassword) {
+        // Hash the password before saving it to the database
+        // $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        // Insert data into the staff_record table
+    //     $sql = "INSERT INTO user_info (sur_name, first_name, last_name, email, address, dob, gender, phone_no, soo, user_type, password, cpassword) VALUES ('$sname', '$fname', '$lname', '$email', '$address', '$DOB', '$gender', '$phone', '$SOO', '$user_type', '$hashedPassword', '$cpassword')";
+
+    //     if ($conn->query($sql) === TRUE) {
+    //         $_SESSION['message'] = "Successfully Registered";
+    //         header('Location: Home.php');
+    //     } else {
+    //         $_SESSION['message'] = "Registration Failed";
+    //         header('Location: Home.php');
+    //     }
+    // } else {
+    //     $_SESSION['message'] = "Passwords do not match";
+//         header('Location: Home.php'); // Redirect back to the registration page
+//     }
+// }
+
+ body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f9f9f9;
+    }
+
+
+.form {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 400px;
+    }
+
+    .form .title {
+      font-size: 20px;
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .form label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .form .flex {
+      display: flex;
+      gap: 10px;
+    }
+
+    .form .input {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .form select {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .form .submit {
+      width: 100%;
+      padding: 10px;
+      background-color: #28a745;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .form .submit:hover {
+      background-color: #218838;
+    }
